@@ -3,7 +3,7 @@ var REGEX = {
 	VAR_NEG: /^[ \t]*we buy (?<var_name>[a-z]+)[.!]$/,
 	VAR_POS: /^[ \t]*we sell (?<var_name>[a-z]+)[.!]$/,
 	VAR_DIV: /^[ \t]*divide (?<var_name>[a-z]+) into (?<divs>\d+) pieces[.!]$/,
-	DEF_PROC: /^[ \t]teach how to (?<proc_name>[a-z]+) with (?<var_list>[a-z]+(, [a-z]+)*)[.!]$/,
+	DEF_PROC: /^[ \t]*teach how to (?<proc_name>[a-z]+) with (?<var_list>[a-z]+(, [a-z]+)*)[.!]$/,
 	END_PROC: /^[ \t]*the procedure ends[.!]$/,
 	PUSH_STACK: /^[ \t]*put (?<var_name>[a-z]+) onto the table[.!]$/,
 	POP_STACK: /^[ \t]*grab (?<var_name>[a-z]+) from the table[.!]$/,
