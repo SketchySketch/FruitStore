@@ -1,2 +1,6 @@
 # FruitStore
-FruitStore is a you-say-what esoteric language.
+FruitStore is an esoteric language.
+
+I can't think of any word to describe it.
+
+...Useless.
