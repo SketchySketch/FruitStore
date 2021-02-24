@@ -1,7 +1,4 @@
-const VarDecl = require("./utils/var_decl_util");
-const ProcDetect = require("./utils/proc_detect");
-const EXC = require("./exceptions").EXC;
-const REGEX = require("./match_rules").REGEX;
+var result = [];
 
 function callProc(func, stack, funcs) {
 	function fall() {
@@ -14,14 +11,14 @@ function callProc(func, stack, funcs) {
 	let stmt = "Open the fruit store!\n" + func.stmt.join("\n");
 	let param = {};
 	for (i of map) param[i] = fall();
-	let res = parse(stmt, false, param, stack, funcs);
+	let res = parse(stmt, param, stack, funcs);
 	param = res.vars;
 	stack = res.stack;
 	for (i of map) param[i] = undefined;
 	return { vars: param, stack: stack };
 }
 
-function parse(string, debug = false, vars = {}, stack = [], funcs = {}) {
+function parse(string, vars = {}, stack = [], funcs = {}) {
 	function append(element) {
 		stack = [element].concat(stack);
 	}
@@ -49,11 +46,16 @@ function parse(string, debug = false, vars = {}, stack = [], funcs = {}) {
 		funcs[name] = {
 			size: list.length,
 			stmt: stmt,
-			varMap: ProcDetect.getMap(list),
+			varMap: getMap(list),
 		};
 	}
+
+	function output(val) {
+		result.push(val);
+	}
+
 	let stmt = string.toLowerCase().split("\n");
-	if (!stmt[0].match(/^[ \t\n]*open the fruit store!$/))
+	if (!stmt[0].match(/^[ \t\n]*open the fruit store[.!]$/))
 		throw EXC.EXC_ILL_START();
 
 	for (let i = 1; i < stmt.length; i++) {
@@ -63,7 +65,7 @@ function parse(string, debug = false, vars = {}, stack = [], funcs = {}) {
 			if (grp.var_name_simp) store(grp.val_val, grp.var_name_simp);
 			if (grp.var_name_comp)
 				store(
-					VarDecl.compValList(grp.val_list, vars),
+					compValList(grp.val_list, vars),
 					grp.var_name_comp
 				);
 		}
@@ -89,7 +91,7 @@ function parse(string, debug = false, vars = {}, stack = [], funcs = {}) {
 		// // // // // // DEF PROC
 		else if (stmt[i].match(REGEX.DEF_PROC)) {
 			let grp = stmt[i].match(REGEX.DEF_PROC).groups;
-			let proc = ProcDetect.getProc(stmt, i);
+			let proc = getProc(stmt, i);
 			defFunc(grp.proc_name, proc.stmt, grp);
 			i = proc.index;
 		}
@@ -139,13 +141,8 @@ function parse(string, debug = false, vars = {}, stack = [], funcs = {}) {
 		// // // // // // OUTPUT
 		else if (stmt[i].match(REGEX.OUTPUT)) {
 			let grp = stmt[i].match(REGEX.OUTPUT).groups;
-			console.log(vars[grp.var_name]);
+			output(vars[grp.var_name]);
 		}
 	}
-	if (debug) console.log("vars", vars, "\nstack", stack, "\nfuncs", funcs);
-	return { vars: vars, stack: stack, funcs: funcs };
-}
-
-module.exports = {
-	parse: parse,
+	return { vars: vars, stack: stack, funcs: funcs, result: result };
 }

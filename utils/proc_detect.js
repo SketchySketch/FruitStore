@@ -1,5 +1,3 @@
-const REGEX = require("../match_rules").REGEX;
-
 function getProc(stmt, index) {
 	let nest = 0;
 	let oIndex = index;
@@ -17,8 +15,3 @@ function getMap(varList) {
 	for (i in varList) varMap[parseInt(i)] = varList[i];
 	return varMap;
 }
-
-module.exports = {
-	getProc: getProc,
-	getMap: getMap,
-};

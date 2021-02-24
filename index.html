@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<script src="index.js"></script>
+		<script src="exceptions.js"></script>
+		<script src="match_rules.js"></script>
+		<script src="utils/var_decl_util.js"></script>
+		<script src="utils/proc_detect.js"></script>
+		<style>
+			textarea {
+				width: 700px;
+				height: 400px;
+			}
+			button {
+				width: 400px;
+				height: 50px;
+			}
+		</style>
+	</head>
+	<body>
+		<textarea id="in">Open the fruit store!</textarea><br/>
+		<button id="run" onclick="document.getElementById('out').innerHTML=parse(document.getElementById('in').value).result.join('\n');">RUN</button>
+		<p id="out"></p>
+	</body>
+</html>

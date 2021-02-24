@@ -8,8 +8,3 @@ var EXC = {
 	EXC_PLU: (pos) => new SyntaxError(`You shouldn't use plural at ${pos}`),
 	EXC_SING: (pos) => new SyntaxError(`You shouldn't use single at ${pos}`),
 };
-
-module.exports = {
-	func: func,
-	EXC: EXC,
-}

@@ -10,7 +10,3 @@ function compValList(valList, vars) {
 	}
 	return res;
 }
-
-module.exports = {
-	compValList: compValList,
-}

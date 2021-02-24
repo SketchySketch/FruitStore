@@ -14,7 +14,3 @@ var REGEX = {
 	CALL_PROC: /^[ \t]*do "(?<proc_name>[a-z]+)" with the things on the table[.!]$/,
 	OUTPUT: /^[ \t]*show our (?<var_name>[a-z]+)[.!]$/,
 };
-
-module.exports = {
-	REGEX: REGEX,
-}
