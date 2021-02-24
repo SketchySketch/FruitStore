@@ -129,7 +129,7 @@ function parse(string, vars = {}, stack = [], funcs = {}) {
 
 		// // // // // // END_PROG
 		else if (stmt[i].match(REGEX.END_PROG)) {
-			return;
+			break;
 		}
 
 		// // // // // // ERR_THROW

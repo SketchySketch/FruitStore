@@ -15,9 +15,17 @@
 				width: 400px;
 				height: 50px;
 			}
+			h1, textarea, button {
+				font-family: "JetBrains Mono", "Fira Code", "Consolas", monospace, sans-serif;
+			}
+			p {
+				font-family: "Georgia", "Times New Roman", "Times", serif
+			}
 		</style>
+		<title>Fruit Store Language: Online Compiler</title>
 	</head>
 	<body>
+		<h1>Fruit Store</h1>
 		<textarea id="in">Open the fruit store!</textarea><br/>
 		<button id="run" onclick="result=[];document.getElementById('out').innerHTML=parse(document.getElementById('in').value).result.join('\n');">RUN</button>
 		<p id="out"></p>
