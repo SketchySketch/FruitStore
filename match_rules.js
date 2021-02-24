@@ -11,6 +11,9 @@ var REGEX = {
 	DISC_ALL: /^[ \t]*discard everything[.!]$/,
 	END_PROG: /^[ \t]*close the store please[.!]$/,
 	ERR_THROW: /^[ \t]*emergency close! (?<reason>.*)$/,
-	CALL_PROC: /^[ \t]*do "(?<proc_name>[a-z]+)" with the things on the table[.!]$/,
+	CALL_PROC: /^[ \t]*do "(?<proc_name>[a-z]+)"[.!]$/,
 	OUTPUT: /^[ \t]*show our (?<var_name>[a-z]+)[.!]$/,
+	IF_NEG: /^[ \t]*do we buy (?<var_name>[a-z]+)\? if so, do "(?<proc_name>[a-z]+)"[.!]$/,
+	IF_POS: /^[ \t]*do we sell (?<var_name>[a-z]+)\? if so, do "(?<proc_name>[a-z]+)"[.!]$/,
+	IF_ZERO: /^[ \t]*is (?<var_name>[a-z]+) free\? if so, do "(?<proc_name>[a-z]+)"[.!]$/,
 };

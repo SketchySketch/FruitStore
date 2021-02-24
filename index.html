@@ -19,7 +19,7 @@
 	</head>
 	<body>
 		<textarea id="in">Open the fruit store!</textarea><br/>
-		<button id="run" onclick="document.getElementById('out').innerHTML=parse(document.getElementById('in').value).result.join('\n');">RUN</button>
+		<button id="run" onclick="result=[];document.getElementById('out').innerHTML=parse(document.getElementById('in').value).result.join('\n');">RUN</button>
 		<p id="out"></p>
 	</body>
 </html>

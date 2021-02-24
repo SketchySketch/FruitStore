@@ -30,7 +30,7 @@ function parse(string, vars = {}, stack = [], funcs = {}) {
 	}
 
 	function store(val, name) {
-		vars[name] = parseInt(val.toString());
+		vars[name] = val;
 	}
 
 	function discard(name) {
@@ -142,6 +142,24 @@ function parse(string, vars = {}, stack = [], funcs = {}) {
 		else if (stmt[i].match(REGEX.OUTPUT)) {
 			let grp = stmt[i].match(REGEX.OUTPUT).groups;
 			output(vars[grp.var_name]);
+		}
+
+		// // // // // // IF_NEG
+		else if (stmt[i].match(REGEX.IF_NEG)) {
+			let grp = stmt[i].match(REGEX.IF_NEG).groups;
+			if (vars[grp.var_name] < 0) callProc(funcs[grp.proc_name], stack, funcs);
+		}
+
+		// // // // // // IF_POS
+		else if (stmt[i].match(REGEX.IF_POS)) {
+			let grp = stmt[i].match(REGEX.IF_POS).groups;
+			if (vars[grp.var_name] > 0) callProc(funcs[grp.proc_name], stack, funcs);
+		}
+
+		// // // // // // IF_ZERO
+		else if (stmt[i].match(REGEX.IF_ZERO)) {
+			let grp = stmt[i].match(REGEX.IF_ZERO).groups;
+			if (vars[grp.var_name] == 0) callProc(funcs[grp.proc_name], stack, funcs);
 		}
 	}
 	return { vars: vars, stack: stack, funcs: funcs, result: result };
